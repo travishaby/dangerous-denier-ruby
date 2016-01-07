@@ -27,21 +27,29 @@ def analyze_crime_data(file_path, analysis_attribute, optional_filter)
     -incident_count[1] #sort by count of incidents
   end
 
-  puts analysis[0..4]
+  analysis[0..4]
 end
 
-Benchmark.bm do |task|
-  task.report { analyze_crime_data("./data/traffic-accidents.csv",
-                                   :incident_address,
-                                   nil) }
-end
-Benchmark.bm do |task|
- task.report { analyze_crime_data("./data/traffic-accidents.csv",
-                                  :incident_address,
-                                  nil) }
-end
-Benchmark.bm do |task|
-  task.report { analyze_crime_data("./data/crime.csv",
-                                   :neighborhood_id,
-                                   "traffic-accident") }
+if __FILE__ == $0
+  Benchmark.bm do |task|
+    task.report { result = analyze_crime_data("./data/traffic-accidents.csv",
+                                     :incident_address,
+                                     nil)
+                 puts result
+                }
+  end
+  Benchmark.bm do |task|
+   task.report { result = analyze_crime_data("./data/traffic-accidents.csv",
+                                    :incident_address,
+                                    nil)
+                puts result
+               }
+  end
+  Benchmark.bm do |task|
+    task.report { result = analyze_crime_data("./data/crime.csv",
+                                     :neighborhood_id,
+                                     "traffic-accident")
+                 puts result
+                }
+  end
 end
