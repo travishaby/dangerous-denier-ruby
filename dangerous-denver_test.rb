@@ -5,7 +5,7 @@ require_relative 'dangerous-denver'
 class DangerousDenverTest < MiniTest::Test
 
   def test_address_analysis_for_traffic_accidents
-    result = analyze_crime_data("./data/traffic-accidents.csv",
+    result = analyze("./data/traffic-accidents.csv",
                                      :incident_address,
                                      nil)
     top_five_accident_intersections = [["I25 HWYNB / W 6TH AVE", 503],
@@ -17,7 +17,7 @@ class DangerousDenverTest < MiniTest::Test
   end
 
   def test_neighborhood_analysis_for_traffic_accidents
-    result = analyze_crime_data("./data/traffic-accidents.csv",
+    result = analyze("./data/traffic-accidents.csv",
                                      :neighborhood_id,
                                      nil)
     top_five_accident_neighborhoods = [["stapleton", 5597],
@@ -29,7 +29,7 @@ class DangerousDenverTest < MiniTest::Test
   end
 
   def test_neighborhood_analysis_for_non_traffic_related_crimes
-    result = analyze_crime_data("./data/crime.csv",
+    result = analyze("./data/crime.csv",
                                 :neighborhood_id,
                                 "traffic-accident")
     top_five_crime_neighborhoods = [["five-points", 13535],
